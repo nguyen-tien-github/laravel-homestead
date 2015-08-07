@@ -30,25 +30,33 @@ Route::delete('foo/bar', function () {
     return 'Delete data';
 });
 </pre>
-<p>
-<!-- open form -->
-{!! Form::open(array('class' => 'form', 'method' => 'post', 'url' =>
-url('foo/bar'))) !!} {!! Form::submit('Post', array('class'=>'btn btn-lg btn-danger')) !!} {!! Form::close() !!}
-<!-- close form -->
-</p><p>
-<!-- open form -->
-{!! Form::open(array('class' => 'form', 'method' => 'put', 'url' =>
-url('foo/bar'))) !!} {!! Form::submit('Put', array('class'=>'btn btn-lg btn-danger')) !!} {!! Form::close() !!}
-<!-- close form -->
-</p><p>
-<!-- open form -->
-{!! Form::open(array('class' => 'form', 'method' => 'delete', 'url' =>
-url('foo/bar'))) !!} {!! Form::submit('Delete', array('class'=>'btn btn-lg btn-danger')) !!} {!! Form::close() !!}
-<!-- close form -->
-</p>
+
+<div class="row">
+	<div class="col-md-1">
+		<!-- open form -->
+		{!! Form::open(array('class' => 'form', 'method' => 'post', 'url' =>
+		url('foo/bar'))) !!} {!! Form::submit('Post', array('class'=>'btn
+		btn-lg btn-danger')) !!} {!! Form::close() !!}
+		<!-- close form -->
+	</div>
+	<div class="col-md-1">
+		<!-- open form -->
+		{!! Form::open(array('class' => 'form', 'method' => 'put', 'url' =>
+		url('foo/bar'))) !!} {!! Form::submit('Put', array('class'=>'btn
+		btn-lg btn-danger')) !!} {!! Form::close() !!}
+		<!-- close form -->
+	</div>
+	<div class="col-md-1">
+		<!-- open form -->
+		{!! Form::open(array('class' => 'form', 'method' => 'delete', 'url' =>
+		url('foo/bar'))) !!} {!! Form::submit('Delete', array('class'=>'btn
+		btn-lg btn-danger')) !!} {!! Form::close() !!}
+		<!-- close form -->
+	</div>
+</div>
+
 <hr>
-<h3>Registering A Route For
-	Multiple Verbs</h3>
+<h3>Registering A Route For Multiple Verbs</h3>
 <p>
 	Sometimes you may need to register a route that responds to multiple
 	HTTP verbs. You may do so using the
@@ -80,7 +88,8 @@ Route::any('foo', function () {
 </pre>
 <!-- open form -->
 {!! Form::open(array('class' => 'form', 'method' => 'post', 'url' =>
-url('/foo'))) !!} {!! Form::submit('Post', array('class'=>'btn btn-lg btn-danger')) !!} {!! Form::close() !!}
+url('/foo'))) !!} {!! Form::submit('Post', array('class'=>'btn btn-lg
+btn-danger')) !!} {!! Form::close() !!}
 <!-- close form -->
 <hr>
 <h3>Generating URLs To Routes</h3>

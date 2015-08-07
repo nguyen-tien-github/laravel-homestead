@@ -1,5 +1,4 @@
 <?php
-
 /*
  * |--------------------------------------------------------------------------
  * | Application Routes
@@ -12,9 +11,38 @@
  */
 
 // Simple route
-Route::get ( '/', function () {
-	return view ( 'welcome' );
+/*
+ * Route::get ( '/company', function () {
+ * return view ( 'mulodo.homepage' );
+ * } );
+ *
+ * //=================================================================================================
+ *
+ */
+/*
+ * SAMPLE WEBSITES
+ */
+// Mulodo Company Site without connecting database
+Route::resource ( 'company', 'MulodoController' );
+
+// Admin system
+Route::group ( [ 
+		'middleware' => 'auth' 
+], function () {
+	Route::group ( [ 
+			'prefix' => 'administrator',
+			'namespace' => 'admin'
+	], function () {
+		Route::resource ( 'sliders', 'SliderController' );
+	} );
+	
+	// general admin
+	Route::resource ( 'administrator', 'MulodoAdminController' );
 } );
+
+// Mulodo Company Site connecting database and retrieving data.
+// =================================================================================================
+
 // I need to research to clear cache in Homestead because of Bootstrap Google Plus Theme
 
 // Basic Routing
@@ -276,17 +304,44 @@ Route::get ( 'photos/popular', 'PhotoController@popular' );
 // Nested Resources
 Route::resource ( 'photos.comments', 'PhotoCommentController' );
 
-// Implicit Controllers
+// Accessing Implicit Controllers
 Route::controller ( 'users', 'UserController' );
 // =================================================================================================
 // HTTP Requests
 Route::get ( 'requests', [ 
 		'as' => 'requests',
 		function () {
+			// create cookie ==> need to research more
+			Cookie::make ( 'name', 'value', 'Anna' ); // And on the next response the cookie will be added automagically.
+			
 			return view ( "todc.requests" );
 		} 
 ] );
 
+Route::put ( 'user8/{id}', 'UserController@update' );
+Route::post ( 'user8/{id}', 'UserController@update' );
+Route::delete ( 'user8/{id}', 'UserController@update' );
+Route::get ( 'user8/{id}', 'UserController@update' );
+
+Route::get ( 'user9/request-path', 'UserController@getRequestPath' );
+
+Route::resource ( 'user10', 'UserController@getRequestMatch' );
+Route::resource ( 'user11', 'UserController@getRequestMatch' );
+
+Route::get ( 'user12/request-path', 'UserController@getRequestFullPath' );
+
+Route::resource ( 'user13', 'UserController@checkMethod' );
+Route::post ( 'user13', 'UserController@retriveInputs' );
+
+Route::get ( '/sample-2', [ 
+		'as' => 'sample-2',
+		'uses' => 'UserController@parseInputs' 
+] );
+
+// retrive cookie ==> research
+Route::post ( '/retrieve-cookie', 'UserController@retrieveCookie' );
+// researching about calling response and cookie in Controllers
+// Route::get('/cookie-response', 'UserController@attachCookieToResponse');
 // =================================================================================================
 // HTTP Responses
 Route::get ( 'responses', [ 
@@ -308,7 +363,7 @@ Route::get ( 'views', [
 // sample-1
 Route::get ( '/greeting', function () {
 	if (view ()->exists ( 'todc.views.samples.sample-1' )) { // check existed view
-	    // return view('todc.views.samples.sample-1', ['name' => 'Tien Nguyen']);
+	                                                         // return view('todc.views.samples.sample-1', ['name' => 'Tien Nguyen']);
 		return view ( 'todc.views.samples.sample-1' )->with ( 'name', 'Tien Nguyen' );
 	} else {
 		return "View cannot find.";
@@ -337,6 +392,15 @@ Route::get ( 'general', [
 		'as' => 'general',
 		function () {
 			return view ( "todc.general" );
+		} 
+] );
+
+// =================================================================================================
+// Models
+Route::get ( 'models', [ 
+		'as' => 'models',
+		function () {
+			return view ( "todc.models" );
 		} 
 ] );
 

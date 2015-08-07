@@ -1,4 +1,4 @@
-<h3>Installation of Vagrant and Virtual Box</h3>
+<h3 id="g2-1">Installation of Vagrant and Virtual Box</h3>
 <p>You only do these steps before installing Laravel Homestead</p>
 <ol>
 	<li>Download Virtual Box (https://www.virtualbox.org/wiki/Downloads)
@@ -139,5 +139,40 @@ variables:
 #       protocol: udp
 </pre>
 	</li>
-
 </ol>
+<hr>
+<h3 id="g2-2">Installation of phpMyAdmin</h3>
+<ul>
+	<li>Download <a href="http://www.phpmyadmin.net/home_page/index.php"
+		target="_blank">phpMyAdmin</a> then unzip it into your code directory.
+		In here I place it into <code>/Applications/AMPPS/www/2015/laravel/Homestead/Homestead/phpMyAdmin</code>
+	
+	<li>open TERMINAL and type <code>sudo nano ~/.homestead/Homestead.yaml</code>,
+		then adding mapping folder and site for phpMyAdmin. <pre>
+	folders:
+    - map: /Applications/AMPPS/www/2015/laravel/Homestead/Homestead/
+      to: /home/vagrant/Code
+      type: "nfs"
+    - map: /Applications/AMPPS/www/2015/laravel/Homestead/Homestead/phpMyAdmin
+      to: /home/vagrant/Code/phpMyAdmin
+
+sites:
+    - map: homestead.app
+      to: /home/vagrant/Code/laravel/public
+    - map: vytien.homestead.app
+      to: /home/vagrant/Code/laravel/public
+    - map: phpMyAdmin.app
+      to: /home/vagrant/Code/phpMyAdmin
+	
+	</pre>
+	</li>
+	<li>Go to Finder and add line <code>127.0.0.1 phpMyAdmin.app</code>
+		into '/private/etc/hosts'
+	
+	<li>Run <a href="http://phpmyadmin.app:8000/" target="_blank">link</a>
+		to access phpMyAdmin
+	
+	<li>Default account: <code>homestead/secret</code>
+
+</ul>
+<hr>
